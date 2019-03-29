@@ -1,3 +1,4 @@
+//TODO: add to gitignore
 var environments = {};
 
 environments.staging = {
