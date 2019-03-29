@@ -4,6 +4,7 @@
 
 const http = require('http'); //importing the required nodejs http server library
 const url = require('url') //importing the required nodejs url library to help us parse User request and know what specific resource they are asking for
+const config = require('./config');
 const stringDecoder = require('string_decoder').StringDecoder;
 
 const server = http.createServer((req,res)=>{
@@ -43,7 +44,7 @@ const server = http.createServer((req,res)=>{
             payload = typeof(payload) == 'object' ? payload : {};
 
             var payloadString = JSON.stringify(payload);
-
+            res.setHeader('Content-Type','application/json');
             res.writeHead(statusCode);
             res.end(payloadString);
 
@@ -55,8 +56,8 @@ const server = http.createServer((req,res)=>{
 
 });
 
-server.listen(3000,()=>{
-    console.log("server listening on port 3000");
+server.listen(config.port,()=>{
+    console.log(`server listening on port ${config.port} in ${config.envName} mode`);
 });
 
 //define handler
